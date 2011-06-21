@@ -98,7 +98,7 @@ class MainProfilerWidget(QtGui.QWidget):
         self.controlsMerged = False
 
         #self.loadFile("/data/results/shRNA-130411/extractedData.csv")
-        self.loadFile("/data/fakeResults/resultsMedium/extractedData.csv")
+        #self.loadFile("/data/fakeResults/resultsMedium/extractedData.csv")
 
     def openFile(self):
         """
