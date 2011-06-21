@@ -93,7 +93,7 @@ class MainProfilerWidget(QtGui.QWidget):
         self.legendWidget = None
 
         #self.loadFile("/data/results/shRNA-130411/extractedData.csv")
-        #self.loadFile("/data/fakeResults/resultsMedium/extractedData.csv")
+        self.loadFile("/data/fakeResults/resultsMedium/extractedData.csv")
 
     def openFile(self):
         """

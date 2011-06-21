@@ -80,7 +80,7 @@ class MainWindow(QtGui.QWidget):
         self.profilerWidget.pushControls.connect(self.correlWellsWidget.receiveControls)
 
         ## Uncomment for debug mode
-        #self.ui.tabWidget.setCurrentWidget(self.profilerWidget)
+        self.ui.tabWidget.setCurrentWidget(self.profilerWidget)
 
     def buildProfiler(self, filename):
         """
