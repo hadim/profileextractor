@@ -120,6 +120,13 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="mergeButton">
+           <property name="text">
+            <string>Merge controls</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="helpButton">
            <property name="enabled">
             <bool>false</bool>

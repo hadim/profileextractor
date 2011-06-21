@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './profiler/mainprofilerwidget.ui'
 #
-# Created: Tue Jun 21 10:58:17 2011
+# Created: Tue Jun 21 13:26:36 2011
 #      by: pyside-uic 0.2.9 running on PySide 1.0.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -64,6 +64,9 @@ class Ui_MainProfilerWidget(object):
         self.legendButton.setEnabled(False)
         self.legendButton.setObjectName("legendButton")
         self.horizontalLayout.addWidget(self.legendButton)
+        self.mergeButton = QtGui.QPushButton(self.scrollAreaWidgetContents)
+        self.mergeButton.setObjectName("mergeButton")
+        self.horizontalLayout.addWidget(self.mergeButton)
         self.helpButton = QtGui.QPushButton(self.scrollAreaWidgetContents)
         self.helpButton.setEnabled(False)
         self.helpButton.setObjectName("helpButton")
@@ -81,5 +84,6 @@ class Ui_MainProfilerWidget(object):
         self.saveCsvButton.setText(QtGui.QApplication.translate("MainProfilerWidget", "Save current as .csv", None, QtGui.QApplication.UnicodeUTF8))
         self.saveButton.setText(QtGui.QApplication.translate("MainProfilerWidget", "Save current profile as an image", None, QtGui.QApplication.UnicodeUTF8))
         self.legendButton.setText(QtGui.QApplication.translate("MainProfilerWidget", "Display legend", None, QtGui.QApplication.UnicodeUTF8))
+        self.mergeButton.setText(QtGui.QApplication.translate("MainProfilerWidget", "Merge controls", None, QtGui.QApplication.UnicodeUTF8))
         self.helpButton.setText(QtGui.QApplication.translate("MainProfilerWidget", "Help", None, QtGui.QApplication.UnicodeUTF8))
 

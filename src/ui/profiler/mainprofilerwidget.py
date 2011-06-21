@@ -43,6 +43,7 @@ from legendwidget import *
 from lib.table import *
 from lib.profiler import *
 from lib.normalizer import *
+from lib.controlsMerger import *
 
 import config as cfg
 import re, os, sys, shutil
@@ -69,7 +70,7 @@ class MainProfilerWidget(QtGui.QWidget):
         self.layout = QVBoxLayout()
         self.containerWellsWidget.setLayout(self.layout)
         self.ui.splitter.insertWidget(0, self.containerWellsWidget)
-        
+
         self.wellsWidget = WellsWidget()
         self.wellsWidget.refreshProfile.connect(self.updateProfile)
 
@@ -88,9 +89,12 @@ class MainProfilerWidget(QtGui.QWidget):
         self.ui.saveCsvButton.clicked.connect(self.saveCurrentProfileCsv)
         self.ui.legendButton.clicked.connect(self.switchLegend)
         self.ui.loadButton.clicked.connect(self.openFile)
+        self.ui.mergeButton.clicked.connect(self.mergeControls)
 
         self.selectedWells = []
+        self.mergedControlsName = []
         self.legendWidget = None
+        self.controlsMerged = False
 
         #self.loadFile("/data/results/shRNA-130411/extractedData.csv")
         self.loadFile("/data/fakeResults/resultsMedium/extractedData.csv")
@@ -134,7 +138,7 @@ class MainProfilerWidget(QtGui.QWidget):
         """
 
         self.selectedWells = self.wellsWidget.toDisplay
-        controls = self.wellsWidget.controlWells
+        self.controls = self.wellsWidget.controlWells
 
         self.wellsWidget.setEnabled(False)
 
@@ -151,7 +155,7 @@ class MainProfilerWidget(QtGui.QWidget):
                 self.currentTable.data.append(l)
                 self.currentTable.lineHeaders.append(header)
                 self.currentTable.colors.append(self.table.colors[i])
-                if header in controls:
+                if header in self.controls:
                     self.currentTable.thickness.append(5)
                 else:
                     self.currentTable.thickness.append(self.table.thickness[i])
@@ -260,3 +264,47 @@ class MainProfilerWidget(QtGui.QWidget):
         """
 
         self.pushControls.emit(self.wellsWidget.controlWells)
+
+    def mergeControls(self):
+        """
+        """
+
+        self.controlsMerged = not self.controlsMerged
+
+        if self.controlsMerged:
+            self.ui.mergeButton.setText("Unmerge controls")
+        else:
+            self.ui.mergeButton.setText("Merge controls")
+
+        controls = self.wellsWidget.controlWells
+
+        if self.controlsMerged:
+
+            merger = ControlsMerger(self.table, controls)
+            self.table = merger.merge()
+
+            # Save selected wells and controls wells
+            selected = self.wellsWidget.toDisplay
+            controls = self.controls
+            controls += merger.controlsName
+
+            self.wellsWidget.load(self.table)
+
+            for c in controls:
+                self.wellsWidget.itemSignal(c, 'singleClick')
+                self.wellsWidget.itemSignal(c, 'doubleClick')
+                
+            for s in selected:
+                self.wellsWidget.itemSignal(s, 'singleClick')
+            
+            self.updateProfile()
+
+            self.mergedControlsName = merger.controlsName
+
+        else:
+
+            self.table.remove_lines_by_name(self.mergedControlsName)
+            self.wellsWidget.load(self.table)
+            self.updateProfile()
+            
+        

@@ -91,6 +91,8 @@ class WellsWidget(QtGui.QTreeWidget):
         self.toDisplay = []
         self.controlWells = []
 
+        self.items = []
+
     def load(self, table):
         """
         """
@@ -100,6 +102,16 @@ class WellsWidget(QtGui.QTreeWidget):
             self.takeTopLevelItem(0)
 
         self.items = []
+
+        self.nWells = 0
+        self.nControls = 0
+
+        self.objects = []
+
+        self.controls = []
+        self.toDisplay = []
+        self.controlWells = []
+        
         self.table = table
         self.fill()
         
@@ -139,7 +151,6 @@ class WellsWidget(QtGui.QTreeWidget):
                     wellItem = WellItem(label, color, dateItem)
                     self.addTopLevelItem(wellItem)
                     self.items.append(wellItem)
-
                     self.objects.append(wellItem)
 
         self.sortItems(0, Qt.AscendingOrder)
@@ -174,12 +185,11 @@ class WellsWidget(QtGui.QTreeWidget):
 
         if self.nWells != len(tmp) or self.nControls != len(controls):
             #self.refreshProfile.emit(tmp, controls)
-
             self.toDisplay = tmp
-            self.controlWells = controls
-            
             self.nWells = len(tmp)
-            self.nControls = len(controls)
+
+        self.nControls = len(controls)
+        self.controlWells = controls
 
     def doubleClick(self, item, column):
         """
@@ -196,5 +206,24 @@ class WellsWidget(QtGui.QTreeWidget):
             font.setWeight(QFont.Bold)
             item.setFont(0, font)
 
+        self.selectItem()
+
+    def itemSignal(self, name, mode = 'singleClick'):
+        """
+        """
+
+        for i in self.items:
+            itemName = i.parent().parent().text(0) + ' -- '
+            itemName += i.parent().text(0) + ' -- '
+            itemName += i.text(0)
+
+            if name == itemName:
+
+                if mode == 'singleClick':
+                    i.setCheckState(0, Qt.Checked)
+                    self.itemClicked.emit(i, 0)
+                elif mode == 'doubleClick':
+                    self.itemDoubleClicked.emit(i, 0)
+                    
         self.selectItem()
         
