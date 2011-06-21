@@ -317,7 +317,7 @@ class Table:
 
         newTable = Table()
         newTable.lineHeaders = self.headers
-
+    
         self.zipIter = False
         for header, line in zip(self.lineHeaders, self):
             newTable.append_column(header, line)

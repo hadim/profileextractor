@@ -52,7 +52,7 @@ class MainProfilerWidget(QtGui.QWidget):
     """
     """
 
-    pushControls = Signal(list)
+    pushControls = Signal(list, object)
     
     def __init__(self, parent = None):
         """
@@ -93,6 +93,7 @@ class MainProfilerWidget(QtGui.QWidget):
 
         self.selectedWells = []
         self.mergedControlsName = []
+        self.controls = []
         self.legendWidget = None
         self.controlsMerged = False
 
@@ -263,7 +264,7 @@ class MainProfilerWidget(QtGui.QWidget):
         """
         """
 
-        self.pushControls.emit(self.wellsWidget.controlWells)
+        self.pushControls.emit(self.wellsWidget.controlWells, self.table)
 
     def mergeControls(self):
         """
