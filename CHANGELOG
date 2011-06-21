@@ -1,0 +1,13 @@
+03/06/2011:
+
+* column and line can be highlighted according to
+selectionned controls in ProfilerWidget
+
+* Profiler update no more instantaneous, need to click on "Update
+  profile" button
+
+* In ProfilerWidget, controls are in foreground on the graph
+
+* Fix bug when draw correlation graph
+
+* switch between pearson / distance mode

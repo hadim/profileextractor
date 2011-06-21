@@ -1,0 +1,19 @@
+============
+Requirements
+============
+4.5mamn
+* Python > 2.6
+* PySide > 1.0 (http://www.pyside.org/)
+* matplotlib (http://matplotlib.sourceforge.net/)
+
+=======
+License
+=======
+
+BSD license. See COPYING.
+
+=======
+Authors
+=======
+
+See AUTHORS.
