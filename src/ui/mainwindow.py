@@ -52,7 +52,7 @@ class MainWindow(QtGui.QWidget):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.version = 'v2.9'
+        self.version = ''
 
         self.setWindowTitle("Profile extractor (%s)" % self.version)
 
