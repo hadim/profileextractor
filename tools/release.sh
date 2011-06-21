@@ -17,7 +17,7 @@ git ci -am "Release $1"
 git tag -a $1 -m "$1"
 
 #git pull origin release
-git push origin release
-git push --tag
+git push origin release --tag
+
 
 
