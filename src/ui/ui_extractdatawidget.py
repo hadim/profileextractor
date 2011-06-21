@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './extractdatawidget.ui'
 #
-# Created: Tue Jun 21 10:58:16 2011
+# Created: Tue Jun 21 13:26:36 2011
 #      by: pyside-uic 0.2.9 running on PySide 1.0.3
 #
 # WARNING! All changes made in this file will be lost!

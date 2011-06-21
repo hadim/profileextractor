@@ -91,7 +91,7 @@ class CorrelationWidget(QtGui.QWidget, Ui_CorrelationWidget):
             self.controls = []
             
         #self.loadFile("/data/results/shRNA-130411/extractedData.csv")
-        #self.loadFile("/data/fakeResults/resultsMedium/extractedData.csv")
+        self.loadFile("/data/fakeResults/resultsMedium/extractedData.csv")
 
     def openFile(self):
         """
@@ -113,6 +113,15 @@ class CorrelationWidget(QtGui.QWidget, Ui_CorrelationWidget):
         # Remove useless column and merge metadata columns
         self.table.remove_column_by_regex([cfg.displayed_column, cfg.metadata_column])
         self.table.merge_column_by_regex([cfg.metadata_column], "Experiment ID")
+
+        self.load(self.table)
+
+    def load(self, table = None):
+        """
+        """
+
+        if table:
+            self.table = table
 
         # Normalize values
         self.table = Normalizer(self.table).normalize()
@@ -446,7 +455,7 @@ class CorrelationWidget(QtGui.QWidget, Ui_CorrelationWidget):
                                  fname = dest)
 
 
-    def receiveControls(self, controls):
+    def receiveControls(self, controls, table = None):
         """
         """
 
@@ -454,7 +463,7 @@ class CorrelationWidget(QtGui.QWidget, Ui_CorrelationWidget):
         for c in controls:
             tmp.append(str(c))
         self.controls = tmp
-        self.fillTableWidget()
+        self.load(table)
         
 
     def switchCalculator(self):

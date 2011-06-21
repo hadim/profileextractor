@@ -194,7 +194,7 @@ class Table:
     # Write method #
     ################
     
-    def append_line(self, line):
+    def append_line(self, line, headerLine = "", color = (0,0,0)):
         """
         """
 
@@ -205,13 +205,19 @@ class Table:
         for i in range(len(self.headers) - len(line)):
             line.append(None)
 
+        self.colors.append(color)
         self.data.append(line)
+        self.lineHeaders.append(headerLine)
+        self.thickness.append(1)
 
     def remove_line(self, index):
         """
         """
 
         self.data.pop(index)
+        self.thickness.pop(index)
+        self.colors.pop(index)
+        self.lineHeaders.pop(index)
 
     def remove_lines(self, index):
         """
@@ -226,7 +232,6 @@ class Table:
 
         for n in lines_name:
             idx = self.lineHeaders.index(n)
-            self.lineHeaders.pop(idx)
             self.remove_line(idx)
         
     def append_column(self, header, data, index = None):
@@ -312,7 +317,7 @@ class Table:
 
         newTable = Table()
         newTable.lineHeaders = self.headers
-
+    
         self.zipIter = False
         for header, line in zip(self.lineHeaders, self):
             newTable.append_column(header, line)
