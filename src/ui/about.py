@@ -56,7 +56,12 @@ class AboutWidget(QtGui.QWidget, Ui_AboutWidget):
         self.titleLabel.setText(title)
 
 
-authors = 'Hadrien Mary <hadrien.mary@gmail.com>'
+authors = """Hadrien Mary <hadrien.mary@gmail.com>
+Nick Hamilton <n.hamilton@imb.uq.edu.au>
+
+Institute for Molecular Bioscience (http://www.imb.uq.edu.au/)
+The University of Queensland
+Brisbane, Australia"""
 
 copying = """Copyright (c) 2011, Hadrien Mary
 All rights reserved.

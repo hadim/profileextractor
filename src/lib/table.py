@@ -58,6 +58,8 @@ class Table:
         self.lineHeaders = []
         self.lineHeadersName = ""
         self.data = []
+        self.thickness = []
+        self.colors = []
 
         if self.fcsv:
             self.loadCSV()
@@ -215,9 +217,14 @@ class Table:
         """
 
         self.data.pop(index)
-        self.thickness.pop(index)
-        self.colors.pop(index)
+        
         self.lineHeaders.pop(index)
+
+        if index < len(self.thickness):
+            self.thickness.pop(index)
+
+        if index < len(self.colors):
+            self.colors.pop(index)
 
     def remove_lines(self, index):
         """
