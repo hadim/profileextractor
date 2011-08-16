@@ -42,6 +42,9 @@ except ImportError:
     print "Error : This script need Qt libraries for Python."
     print "Please install PySide: http://www.pyside.org/"
 
+import sys
+sys.path.append('.')
+    
 from table import *
 from stats import *
 
@@ -482,11 +485,11 @@ class DataExtracter(QThread):
 
 if __name__ == '__main__':
 
-    import sys
+    import sys, os
     from PySide import QtCore, QtGui
 
     app = QtCore.QCoreApplication(sys.argv)
-    
+
     extract = DataExtracter(sys.argv[1],
                             { 'min' : 30, 'max': 800 },
                             { 'min' : 0, 'max': 200 })
